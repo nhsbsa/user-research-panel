@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar user-research-panel-app/target/*.jar  
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar user-research-panel-app/target/*.jar  
