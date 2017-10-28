@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar user-research-panel-app/target/*.jar  
