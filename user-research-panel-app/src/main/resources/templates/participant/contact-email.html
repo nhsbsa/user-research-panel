@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>NHSBSA - User Research</title>
+</head>
+<body>
+
+   <form action="#" method="POST" th:action="@{/email-submit}">
+       <div>
+           <label for="email">Email:</label>
+           <input type="email" name="email" maxlength="100" size="20" required="required"/>
+       </div>
+       <button type="submit">Submit</button>
+   </form>
+
+</body>
+</html>

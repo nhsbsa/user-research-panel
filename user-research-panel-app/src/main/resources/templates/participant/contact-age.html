@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>NHSBSA - User Research</title>
+</head>
+<body>
+
+   <form action="#" method="POST" th:action="@{/age-submit}">
+       <div>
+           <label for="age">Age:</label>
+           <input type="radio" name="age" value="16-29"/>16-29
+           <input type="radio" name="age" value="30-65"/>30-65
+           <input type="radio" name="age" value="65+"/>65+
+       </div>
+       <button type="submit">Submit</button>
+   </form>
+
+</body>
+</html>

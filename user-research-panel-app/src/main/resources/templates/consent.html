@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>NHSBSA - User Research</title>
+</head>
+<body>
+
+   <form action="#" method="POST" th:action="@{/consent-submit}">
+       <div>
+           <label for="consent">Consent:</label>
+           <input type="checkbox" name="consent" required="required"/>
+       </div>
+       <button type="submit">Submit</button>
+   </form>
+
+</body>
+</html>
