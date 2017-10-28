@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>NHSBSA - User Research</title>
+</head>
+<body>
+
+   <h1>If you have bought a Prescription Prepayment Certificate before what duration do you usually buy, 3 months of 12 months?</h1>
+   <form action="#" method="POST" th:action="@{/ppc-past-duration-submit}">
+       <div>
+           <input type="radio" name="purchased-duration-ppc" value="3"/>3 month
+           <input type="radio" name="purchased-duration-ppc" value="12"/>12 month
+       </div>
+       <button type="submit">Submit</button>
+   </form>
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 package uk.nhs.nhsbsa.research.userresearchapp.vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.context.annotation.Scope;
 
@@ -17,6 +19,12 @@ public class ParticipantVO implements Serializable {
 	private String email;
 	
 	private String postcode;
+	
+	private List<ScreeningQuestion> screening;
+	
+	public ParticipantVO() {
+		screening = new ArrayList<>();
+	}
 
 	public String getName() {
 		return name;
@@ -58,9 +66,13 @@ public class ParticipantVO implements Serializable {
 		this.postcode = postcode;
 	}
 
+	public List<ScreeningQuestion> getScreening() {
+		return screening;
+	}
+
 	@Override
 	public String toString() {
-		return "Participant [name=" + name + ", telephone=" + telephone + ", age=" + age + ", email=" + email
-				+ ", postcode=" + postcode + "]";
+		return "ParticipantVO [name=" + name + ", telephone=" + telephone + ", age=" + age + ", email=" + email
+				+ ", postcode=" + postcode + ", screening=" + screening + "]";
 	}
 }

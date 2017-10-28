@@ -118,7 +118,7 @@ public class ParticipantController {
 		ParticipantVO participant = (ParticipantVO) session.getAttribute("participant");
 		participant.setAge(model.getAge());
 		session.setAttribute("participant", participant);
-		return "redirect:participant-consent";
+		return "redirect:screening-ppc-previously";
 	}
 	
 	@RequestMapping(value = "/participant-consent", method = RequestMethod.GET)

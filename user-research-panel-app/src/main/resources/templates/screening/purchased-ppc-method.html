@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>NHSBSA - User Research</title>
+</head>
+<body>
+
+   <h1>If you have bought a Prescription Prepayment Certificate before how did you buy it?</h1>
+   <form action="#" method="POST" th:action="@{/ppc-past-method-submit}">
+       <div>
+           <input type="radio" name="purchased-method-ppc" value="online"/>Online
+           <input type="radio" name="purchased-method-ppc" value="pharmacy"/>Pharmacy
+           <input type="radio" name="purchased-method-ppc" value="phone"/>Phone
+           <input type="radio" name="purchased-method-ppc" value="paper"/>Paper
+       </div>
+       <button type="submit">Submit</button>
+   </form>
+
+</body>
+</html>
