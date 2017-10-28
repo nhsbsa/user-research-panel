@@ -12,6 +12,8 @@ public class ParticipantVO implements Serializable {
 
 	private String name;
 	
+	private String system;
+	
 	private String telephone;
 	
 	private String age;
@@ -20,7 +22,7 @@ public class ParticipantVO implements Serializable {
 	
 	private String postcode;
 	
-	private List<ScreeningQuestion> screening;
+	private List<ScreeningQuestion<?>> screening;
 	
 	public ParticipantVO() {
 		screening = new ArrayList<>();
@@ -66,13 +68,21 @@ public class ParticipantVO implements Serializable {
 		this.postcode = postcode;
 	}
 
-	public List<ScreeningQuestion> getScreening() {
+	public List<ScreeningQuestion<?>> getScreening() {
 		return screening;
+	}
+
+	public String getSystem() {
+		return system;
+	}
+
+	public void setSystem(String system) {
+		this.system = system;
 	}
 
 	@Override
 	public String toString() {
-		return "ParticipantVO [name=" + name + ", telephone=" + telephone + ", age=" + age + ", email=" + email
-				+ ", postcode=" + postcode + ", screening=" + screening + "]";
+		return "ParticipantVO [name=" + name + ", system=" + system + ", telephone=" + telephone + ", age=" + age
+				+ ", email=" + email + ", postcode=" + postcode + ", screening=" + screening + "]";
 	}
 }

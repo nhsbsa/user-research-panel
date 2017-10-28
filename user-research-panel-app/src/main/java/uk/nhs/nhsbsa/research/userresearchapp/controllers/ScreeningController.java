@@ -14,78 +14,76 @@ import uk.nhs.nhsbsa.research.userresearchapp.forms.ScreeningPurchasedMethodPPC;
 import uk.nhs.nhsbsa.research.userresearchapp.forms.ScreeningPurchasedPPC;
 import uk.nhs.nhsbsa.research.userresearchapp.vo.ParticipantVO;
 import uk.nhs.nhsbsa.research.userresearchapp.vo.ScreeningQuestion;
+import uk.nhs.nhsbsa.research.userresearchapp.vo.SessionAttributes;
 
 @Controller
 public class ScreeningController {
 
-	@RequestMapping(value = "/screening-ppc-previously", method = RequestMethod.GET)
+	private static final String PATH_SCREENING_PURCHASED_PPC = "screening/purchased-ppc";
+	private static final String PATH_SCREENING_PURCHASED_PPC_METHOD = "screening/purchased-ppc-method";
+	private static final String PATH_SCREENING_PURCHASED_PPC_DURATION = "screening/purchased-ppc-duration";
+
+	@RequestMapping(value = ResearchPaths.PATH_SCREENING_PPC_PREVIOUS, method = RequestMethod.GET)
 	public ModelAndView ppc() {
-		ModelAndView mv = new ModelAndView("screening/purchased-ppc");
+		ModelAndView mv = new ModelAndView(PATH_SCREENING_PURCHASED_PPC);
 		mv.addObject(new ScreeningPurchasedPPC());
 		return mv;
 	}
 	
-	@RequestMapping(value = "/ppc-past-submit", method = RequestMethod.POST)
+	@RequestMapping(value = ResearchPaths.PATH_PPC_PAST_SUBMIT, method = RequestMethod.POST)
 	public String screeningPPCPurchasedPreviously(@Valid @ModelAttribute ScreeningPurchasedPPC model,
 			HttpSession session) {
-		ParticipantVO participant = (ParticipantVO) session.getAttribute("participant");
+		ParticipantVO participant = (ParticipantVO) session.getAttribute(SessionAttributes.SESSION_PARTICIPANT);
 		
 		ScreeningQuestion<Boolean> previousPpc = new ScreeningQuestion<>();
 		previousPpc.setAnswer(model.isPreviousPpc());
 		
 		participant.getScreening().add(previousPpc);
 		
-		String page;
-		if(model.isPreviousPpc()) {
-		    page = "redirect:screening-ppc-previous-method";
-		}
-		else {
-			page = "redirect:participant-consent";
-		}
-		
-		session.setAttribute("participant", participant);
-		return page;
+		session.setAttribute(SessionAttributes.SESSION_PARTICIPANT, participant);
+		return PPCScreeningRouter.getNextScreenInFlow(model);
 	}
 	
-	@RequestMapping(value = "/screening-ppc-previous-method", method = RequestMethod.GET)
+	@RequestMapping(value = ResearchPaths.PATH_SCREENING_PPC_PREVIOUS_METHOD, 
+			method = RequestMethod.GET)
 	public ModelAndView ppcMethod() {
-		ModelAndView mv = new ModelAndView("screening/purchased-ppc-method");
+		ModelAndView mv = new ModelAndView(PATH_SCREENING_PURCHASED_PPC_METHOD);
 		mv.addObject(new ScreeningPurchasedMethodPPC());
 		return mv;
 	}
 	
-	@RequestMapping(value = "/ppc-past-method-submit", method = RequestMethod.POST)
+	@RequestMapping(value = ResearchPaths.PATH_PPC_PAST_METHOD_SUBMIT, method = RequestMethod.POST)
 	public String screeningPPCPurchasedPreviousMethod(@Valid @ModelAttribute ScreeningPurchasedMethodPPC model,
 			HttpSession session) {
-		ParticipantVO participant = (ParticipantVO) session.getAttribute("participant");
+		ParticipantVO participant = (ParticipantVO) session.getAttribute(SessionAttributes.SESSION_PARTICIPANT);
 		
 		ScreeningQuestion<String> ppcMethod = new ScreeningQuestion<>();
 		ppcMethod.setAnswer(model.getMethod());
 		
 		participant.getScreening().add(ppcMethod);
 		
-		session.setAttribute("participant", participant);
-		return "redirect:screening-ppc-previous-duration";
+		session.setAttribute(SessionAttributes.SESSION_PARTICIPANT, participant);
+		return ResearchPaths.PATH_REDIRECT + ResearchPaths.PATH_SCREENING_PPC_PREVIOUS_DURATION;
 	}
 	
-	@RequestMapping(value = "/screening-ppc-previous-duration", method = RequestMethod.GET)
+	@RequestMapping(value = ResearchPaths.PATH_SCREENING_PPC_PREVIOUS_DURATION, method = RequestMethod.GET)
 	public ModelAndView ppcDuration() {
-		ModelAndView mv = new ModelAndView("screening/purchased-ppc-duration");
+		ModelAndView mv = new ModelAndView(PATH_SCREENING_PURCHASED_PPC_DURATION);
 		mv.addObject(new ScreeningPurchasedDurationPPC());
 		return mv;
 	}
 	
-	@RequestMapping(value = "/ppc-past-duration-submit", method = RequestMethod.POST)
+	@RequestMapping(value = ResearchPaths.PATH_PPC_PAST_DURATION_SUBMIT, method = RequestMethod.POST)
 	public String screeningPPCPurchasedPreviousDuration(@Valid @ModelAttribute ScreeningPurchasedDurationPPC model,
 			HttpSession session) {
-		ParticipantVO participant = (ParticipantVO) session.getAttribute("participant");
+		ParticipantVO participant = (ParticipantVO) session.getAttribute(SessionAttributes.SESSION_PARTICIPANT);
 		
 		ScreeningQuestion<Integer> ppcMethod = new ScreeningQuestion<>();
 		ppcMethod.setAnswer(model.getDuration());
 		
 		participant.getScreening().add(ppcMethod);
 		
-		session.setAttribute("participant", participant);
-		return "redirect:participant-consent";
+		session.setAttribute(SessionAttributes.SESSION_PARTICIPANT, participant);
+		return ResearchPaths.PATH_REDIRECT + ResearchPaths.PATH_PARTICIPANT_CONSENT;
 	}
 }
