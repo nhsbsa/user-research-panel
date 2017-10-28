@@ -6,7 +6,6 @@ databaseChangeLog:
         - createSequence:
             cycle: true
             incrementBy: 1
-            ordered: true
             sequenceName: seq_id
             startValue: 1
         - createTable:
